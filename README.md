@@ -1,4 +1,4 @@
-# LearnOpenGL代码整理
+# LearnOpenGL学习
 
 资料来源：
 

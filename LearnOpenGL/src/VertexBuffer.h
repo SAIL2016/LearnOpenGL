@@ -1,0 +1,15 @@
+#pragma once
+
+class VertexBuffer
+{
+private:
+	// 通用取名
+	unsigned int m_rendererID;
+public:
+	VertexBuffer(const void* data, unsigned int size);
+	~VertexBuffer();
+
+	void Bind() const;
+	void Unbind() const;
+};
+

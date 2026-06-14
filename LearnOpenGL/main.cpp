@@ -14,6 +14,9 @@
 #include "src/Shader.h"
 #include "src/Texture.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+
 // 设置
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -63,9 +66,16 @@ void test4(GLFWwindow* window)
 
         IndexBuffer ib(indices, 6);
 
+		// 设置投影矩阵和模型矩阵
+		// 这里使用了一个正交投影矩阵，参数分别是左、右、下、上、近、远平面的位置
+		// 是把所有的坐标都映射到一个[-2,2] x [-1.5,1.5]的平面内，z轴的范围是[-1,1]
+        glm::mat4 projection = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);
+		glm::mat4 model = glm::mat4(1.0f);
+
 		Shader shader("res/shaders/Basic.shader");
 		shader.Bind();
 		shader.SetUniform4f("u_color", 0.2f, 0.3f, 0.8f, 1.0f);
+		shader.SetUniformMat4f("u_MVP", projection);
 
 		Texture texture("res/textures/awesomeface.png");
 		texture.Bind(0);
